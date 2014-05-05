@@ -21,6 +21,7 @@ process.on('exit', function() {
 
 // load settings
 var settings = yaml.load(fs.readFileSync('./config/config.yml', 'utf-8'));
+var cmdprefix = settings.commands.prefix;
 
 // load winston's cli defaults
 winston.cli();
@@ -134,14 +135,15 @@ client.addListener('error', function(message) {
 });
 
 client.addListener('message', function(from, channel, message) {
-  var match = message.match(/^(!?)(\S+)/);
+  var re = "/^(" + prefix + ""?)(\S+)/";
+  var match = message.match(re);
   if(match == null) return;
   var prefix  = match[1];
   var command = match[2];
 
   if(settings.commands[command]) {
     if(channel == client.nick && settings.commands[command].pm === false) return;
-    if(channel != client.nick && (settings.commands[command].channel === false || prefix != '!')) return;
+    if(channel != client.nick && (settings.commands[command].channel === false || prefix != cmdprefix)) return;
   } else {
     return;
   }
@@ -178,7 +180,7 @@ client.addListener('message', function(from, channel, message) {
       case 'rain':
         var match = message.match(/^.?rain ([\d\.]+) ?(\d+)?/);
         if(match == null || !match[1]) {
-          client.say(channel, 'Usage: !rain <amount> [max people]');
+          client.say(channel, 'Usage: ' + cmdprefix + 'rain <amount> [max people]');
           return;
         }
 
@@ -243,7 +245,7 @@ client.addListener('message', function(from, channel, message) {
       case 'tip':
         var match = message.match(/^.?tip (\S+) ([\d\.]+)/);
         if(match == null || match.length < 3) {
-          client.say(channel, 'Usage: !tip <nickname> <amount>')
+          client.say(channel, 'Usage: ' + cmdprefix + 'tip <nickname> <amount>')
           return;
         }
         var to     = match[1];
@@ -328,7 +330,7 @@ client.addListener('message', function(from, channel, message) {
       case 'withdraw':
         var match = message.match(/^.?withdraw (\S+)$/);
         if(match == null) {
-          client.say(channel, 'Usage: !withdraw <' + settings.coin.full_name + ' address>');
+          client.say(channel, 'Usage: ' + cmdprefix + 'withdraw <' + settings.coin.full_name + ' address>');
           return;
         }
         var address = match[1];
