@@ -141,9 +141,10 @@ client.addListener('error', function(message) {
 });
 
 client.addListener('message', function(from, channel, message) {
-  var re = "^(" + cmdprefix + "?)(\\S+)";
+  var re = "^(\\" + cmdprefix + "?)(\\S+)";
   var reg = new RegExp(re);
   var match = message.match(reg);
+
   if(match == null) return;
   var prefix  = match[1];
   var command = match[2];
@@ -166,7 +167,7 @@ client.addListener('message', function(from, channel, message) {
       msg.push(settings.messages[command][i].expand({}));
     }
 
-    client.say(msg.join(', '));
+    client.say(channel, msg.join(', '));
 
     return;
   }
