@@ -33,6 +33,12 @@ if(settings.log.file) {
   , level: 'info'});
 }
 
+// make sure the command prefix has been specified
+if(cmdprefix == null || cmdprefix.length == 0) {
+  winston.info('Command prefix is missing from the config');
+  process.exit(1);
+}
+
 // connect to coin json-rpc
 winston.info('Connecting to coind...');
 
