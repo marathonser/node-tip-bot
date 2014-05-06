@@ -3,7 +3,7 @@ node-tip-bot is an open-source node.js IRC bot for tipping with altcoins. It use
 # Instalation
 To install node-tip-bot simply clone this repo and install dependencies:
 ```bash
-git clone https://github.com/unek/node-tip-bot
+git clone https://github.com/marathonser/node-tip-bot
 cd node-tip-bot
 npm install
 ```
@@ -56,6 +56,7 @@ Basic coin settings.
 * **full_name** - full coin's name (eg. `dogecoin`)
 
 ## commands
+* **prefix** - the prefix of the commands to listen for (eg. '!' or '.')
 Here you can restrict some commands to work only on PM/channel.
 
 ## messages
@@ -91,6 +92,5 @@ To run the bot simply use `node bin/tipbot` or `npm start`.
 ## Donations
 Donations are welcome! If you like my bot and want to donate me, here are my wallet addresses:
 
-* **Bitcoin**: 1G7T2JNDnbxo3txFWZSuV5oYq8qwtSEg51
-* **Dogecoin**: DGLT1pTSKAXLSSSz1NGFgZNLioDyHdaDyA
+* **Dogecoin**: D9R2gsbBwTQbB9XFkQ8s8d9Lvm2VRGkdJK
 
