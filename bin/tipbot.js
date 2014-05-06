@@ -135,8 +135,9 @@ client.addListener('error', function(message) {
 });
 
 client.addListener('message', function(from, channel, message) {
-  var re = "/^(" + prefix + ""?)(\S+)/";
-  var match = message.match(re);
+  var re = "^(" + cmdprefix + "?)(\\S+)";
+  var reg = new RegExp(re);
+  var match = message.match(reg);
   if(match == null) return;
   var prefix  = match[1];
   var command = match[2];
