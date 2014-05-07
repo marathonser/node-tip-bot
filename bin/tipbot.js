@@ -225,8 +225,9 @@ client.addListener('message', function(from, channel, message) {
 
               max = max ? Math.min(max, names.length) : names.length;
               if(max == 0) return;
+              var whole_channel = false;
+              if(max == names.length) whole_channel = true;
               names = names.slice(0, max);
-
 
               if(amount / max < settings.coin.min_rain) {
                 client.say(channel, settings.messages.rain_too_small.expand({from: from, amount: amount, min_rain: settings.coin.min_rain * max}));
@@ -242,7 +243,7 @@ client.addListener('message', function(from, channel, message) {
                 });
               }
 
-              client.say(channel, settings.messages.rain.expand({name: from, amount: amount / max, list: names.join(', ')}));
+              client.say(channel, settings.messages.rain.expand({name: from, amount: amount / max, list: whole_channel ? 'the whole channel' : names.join(', ')}));
             });
           } else {
             winston.info('%s tried to tip %s %d, but has only %d', from, to, amount, balance);
