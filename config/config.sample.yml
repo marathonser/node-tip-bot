@@ -2,7 +2,6 @@ connection:
   host: irc.freenode.net
   port: 6697
   secure: true
-  status_command: ACC
   debug: false
 login: 
   nickname: nodetip
@@ -31,7 +30,6 @@ webadmin:
   port: 8080
   users:
     unek: 123
-    nix: 456
 commands:
   prefix: '!'
   help:
@@ -59,10 +57,10 @@ messages:
   error: 'Sorry %name%, something went wrong.'
   no_funds: "Sorry %name%, you don't have enough funds (you're %short%%short_name% short)"
   not_identified: '%name%: You need to be identified with NickServ to tip.'
-  tipped: 'Wow! %from% tipped %to% %amount%%short_name%! "/msg %nick% help" to claim.'
+  tipped: '%from% tipped %to% %amount%%short_name%! "/msg %nick% help" to claim.'
   balance: '%name% has %balance%%short_name%.'
   balance_unconfirmed: '%name% has %balance%%short_name% (unconfirmed: %unconfirmed%%short_name%)'
-  deposit_address: Your deposit address %address%
+  deposit_address: 'Your deposit address %address%'
   withdraw_too_small: 'Sorry %name%, you need to withdraw at least %min_withdraw%%short_name% (you have %balance%%short_name%)'
   invalid_address: 'Sorry %name%, the address you specified is invalid (%address%).'
   tip_too_small: 'Sorry %from%, your tip to %to% (%amount%%short_name%) is too small (min. %min_tip%%short_name%).'
