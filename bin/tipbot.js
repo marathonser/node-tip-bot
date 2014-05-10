@@ -398,7 +398,7 @@ client.addListener('message', function(from, channel, message) {
                 for(var i = 0; i < settings.messages.withdraw_success.length; i++) {
                   msg.push(settings.messages.withdraw_success[i].expand(values));
                 };
-                client.say(channel, msg.join('\n');
+                client.say(channel, msg.join('\n'));
 
                 // transfer the rest (usually withdrawal fee - txfee) to bots wallet
                 coin.getBalance(from.toLowerCase(), function(err, balance) {
