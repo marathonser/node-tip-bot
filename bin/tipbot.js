@@ -218,8 +218,10 @@ client.addListener('message', function(from, channel, message) {
 
           if(balance >= amount) {
             client.getNames(channel, function(names) {
-              // remove tipper from the list
+              // remove tipper, bot, and ChanServ from the list
               names.splice(names.indexOf(from), 1);
+              names.splice(names.indexOf(client.nick), 1);
+              names.splice('ChanServ', 1);
               // shuffle the array
               for(var j, x, i = names.length; i; j = Math.floor(Math.random() * i), x = names[--i], names[i] = names[j], names[j] = x);
 
