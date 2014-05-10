@@ -394,10 +394,11 @@ client.addListener('message', function(from, channel, message) {
                 }
 
                 var values = {name: from, address: address, balance: balance, amount: balance - settings.coin.withdrawal_fee, transaction: reply}
+                var msg = [];
                 for(var i = 0; i < settings.messages.withdraw_success.length; i++) {
-                  var msg = settings.messages.withdraw_success[i];
-                  client.say(channel, msg.expand(values));
+                  msg.push(settings.messages.withdraw_success[i].expand(values));
                 };
+                client.say(channel, msg.join('\n');
 
                 // transfer the rest (usually withdrawal fee - txfee) to bots wallet
                 coin.getBalance(from.toLowerCase(), function(err, balance) {
@@ -409,7 +410,12 @@ client.addListener('message', function(from, channel, message) {
                   var balance = typeof(balance) == 'object' ? balance.result : balance;
 
                   // moves the rest to bot's wallet
-                  coin.move(from.toLowerCase(), settings.login.nickname.toLowerCase(), balance);
+                  coin.move(from.toLowerCase(), settings.login.nickname.toLowerCase(), balance, function(err, reply) {
+                    if(err || !reply) {
+                      winston.error('Something went wrong while transferring remaining fee', err);
+                      return;
+                    }
+                  });
                 });
               });
             });
